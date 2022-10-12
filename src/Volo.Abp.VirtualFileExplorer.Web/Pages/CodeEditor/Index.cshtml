@@ -1,0 +1,43 @@
+﻿@page
+@using Localization.Resources.AbpUi
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using Volo.Abp.VirtualFileExplorer.Web.Localization
+@using Volo.Abp.VirtualFileExplorer.Web.Navigation
+@using Volo.Abp.VirtualFileExplorer.Web.Pages.CodeEditor
+@model IndexModel
+@inject IPageLayout PageLayout
+@{
+    PageLayout.Content.Title = "CodeEditor";
+    PageLayout.Content.BreadCrumb.Add("CodeEditor");
+    PageLayout.Content.MenuItemName = "CodeEditor";
+}
+
+@section scripts {
+    @*<script src="/libs/monaco-editor/min/vs/loader.js"></script>*@
+    <script src="/libs/requirejs/require.js"></script>
+    <script>
+        debugger
+        require.config({ paths: { vs: '/libs/monaco-editor/min/vs' } });
+        require.config({
+            'vs/nls': {
+                availableLanguages: {
+                    '*': 'zh-cn'
+                }
+            }
+        });
+
+        require(['vs/editor/editor.main'], function () {
+            debugger
+
+            var editor = monaco.editor.create(document.getElementById('container'), {
+                value: ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
+                language: 'javascript'
+            });
+        });
+    </script>
+}
+
+<abp-card id="CodeEditor">
+    <div id="container" style="width: 800px; height: 600px; border: 1px solid grey"></div>
+</abp-card>

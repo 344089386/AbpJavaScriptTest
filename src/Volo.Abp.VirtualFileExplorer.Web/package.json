@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "name": "my-app",
+  "private": true,
+  "dependencies": {
+    "requirejs": "^2.3.6",
+    "monaco-editor ": "0.34.0"
+  }
+}
